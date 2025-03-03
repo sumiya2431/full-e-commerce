@@ -1,0 +1,111 @@
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Centering the authentication container */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+
+/* Authentication Box */
+.auth-box {
+  background: white;
+  padding: 2rem;
+  width: 350px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Heading */
+.auth-box h2 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* Input Group (Icon + Input Field) */
+.input-group {
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.input-group span {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #555;
+}
+
+/* Input Fields */
+.input-group input, 
+.input-group select {
+  width: 100%;
+  padding: 10px 10px 10px 35px; /* Extra left padding for icon */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+/* Input Focus Effect */
+.input-group input:focus, 
+.input-group select:focus {
+  border-color: #4facfe;
+  outline: none;
+  box-shadow: 0 0 5px rgba(79, 172, 254, 0.5);
+}
+
+/* Role Dropdown Styling */
+.auth-box select {
+  appearance: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+/* Buttons */
+.auth-box button {
+  width: 100%;
+  background: #4facfe;
+  border: none;
+  color: white;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Hover effect */
+.auth-box button:hover {
+  background: #00c2ff;
+}
+
+/* Error Message */
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 400px) {
+  .auth-box {
+    width: 90%;
+  }
+}
