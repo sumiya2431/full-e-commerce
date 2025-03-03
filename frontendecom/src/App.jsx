@@ -1,7 +1,6 @@
 import { BrowserRouter as Router } from "react-router-dom";
-import RoutesComponent from "./routes"; // Ensure the file name matches exactly
-import "./index.css"; // Ensure this file exists
-
+import RoutesComponent from "./routes"; 
+import "./index.css"; 
 function App() {
   return (
     <Router>

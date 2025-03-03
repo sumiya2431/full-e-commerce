@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { login } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../store/store";
-import "../styles/Auth.css"; // Import CSS
+import "../styles/Auth.css"; 
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });

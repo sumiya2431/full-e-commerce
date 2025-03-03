@@ -1,7 +1,6 @@
 const { client } = require("../config/db");
 const axios = require("axios");
 
-// ✅ GET all products
 exports.getProducts = async (req, res) => {
     try {
         const result = await client.query('SELECT * FROM products');
@@ -14,7 +13,6 @@ exports.getProducts = async (req, res) => {
 
 
 
-// ✅ ADD a new product
 exports.addProduct = async (req, res) => {
     const { title, description, price, category_id, stock, images, rating } = req.body;
     const createdAt = new Date();
@@ -33,7 +31,6 @@ exports.addProduct = async (req, res) => {
     }
 };
 
-// ✅ UPDATE a product dynamically with correct parameter indexing
 exports.updateProduct = async (req, res) => {
     const { id } = req.params;
     const updates = req.body;
@@ -59,12 +56,11 @@ exports.updateProduct = async (req, res) => {
         return res.status(400).json({ message: "Invalid fields provided" });
     }
 
-    // ✅ Correctly add updated_at at the next available index
     values.push(new Date());
     fields.push(`updated_at = $${index}`);
-    index++; // Increment for updated_at
+    index++; 
 
-    values.push(id); // Add product ID at the last index
+    values.push(id); 
 
     const query = `
         UPDATE products 
@@ -88,7 +84,6 @@ exports.updateProduct = async (req, res) => {
 };
 
 
-// ✅ DELETE a product
 exports.deleteProduct = async (req, res) => {
     const { id } = req.params;
     try {
@@ -103,7 +98,7 @@ exports.deleteProduct = async (req, res) => {
     }
 };
 
-// ✅ GET all categories
+
 exports.getCategories = async (req, res) => {
     try {
         const result = await client.query("SELECT * FROM categories");
@@ -114,13 +109,13 @@ exports.getCategories = async (req, res) => {
     }
 };
 
-// ✅ ADD A NEW CATEGORY WITH VALIDATION
+
 exports.addCategory = async (req, res) => {
     const { category_name, parent_category } = req.body;
     const createdAt = new Date();
     const updatedAt = new Date();
 
-    // 🚨 Validate input (category_name is required)
+    
     if (!category_name || category_name.trim() === "") {
         return res.status(400).json({ message: "category_name is required" });
     }
@@ -142,7 +137,7 @@ exports.addCategory = async (req, res) => {
 
 
 
-// ✅ UPDATE a category
+
 exports.updateCategory = async (req, res) => {
     const { id } = req.params;
     const { category_name, parent_category } = req.body;
@@ -191,7 +186,7 @@ exports.deleteCategory = async (req, res) => {
 
 exports.addProductsFromAPI = async (req, res) => {
     try {
-        // Fetch products from the external API
+        
         const response = await axios.get("https://fakestoreapi.com/products");
         const products = response.data;
 
@@ -207,7 +202,7 @@ exports.addProductsFromAPI = async (req, res) => {
         for (const product of products) {
             const { title, description, price, category, stock, image, rating } = product;
 
-            // ✅ Ensure category exists or insert it
+            
             let categoryId;
             const categoryResult = await client.query(
                 `SELECT id FROM categories WHERE category_name = $1 LIMIT 1`,
@@ -226,7 +221,7 @@ exports.addProductsFromAPI = async (req, res) => {
                 categoryId = newCategory.rows[0].id;
             }
 
-            // ✅ Insert product into database
+            
             await client.query(
                 `INSERT INTO products (title, description, price, category_id, stock, image, rating, created_at, updated_at) 
                  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,

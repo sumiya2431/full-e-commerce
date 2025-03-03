@@ -72,7 +72,8 @@ exports.placeOrder = async (req, res) => {
             [userId, JSON.stringify(products), 'Pending', 'unpaid', date, date]
         );
 
-        // Clear the user's cart after placing the order
+        
+        
         await client.query('DELETE FROM cart WHERE user_id = $1', [userId]);
 
         res.status(200).json({ message: 'Order placed successfully' });
